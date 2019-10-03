@@ -517,8 +517,7 @@ public class Testing {
         else if (root.parent != null)
             return false;
         else
-            return verifyParentPointersHelper(root, root.left) &&
-                    verifyParentPointersHelper(root, root.right);
+            return verifyParentPointersHelper(root, root.left) && verifyParentPointersHelper(root, root.right);
     }
 
     private <K> boolean verifyParentPointersHelper(BinarySearchTree<K>.Node p, BinarySearchTree<K>.Node q) {

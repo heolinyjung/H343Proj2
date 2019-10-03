@@ -36,7 +36,7 @@ public class BinarySearchTree <K> implements Tree <K> {
          */
         public Node(K key) {
             this(key, null, null);
-            this.height = -1;
+            this.height = 0;
         }
 
         /**
@@ -80,7 +80,7 @@ public class BinarySearchTree <K> implements Tree <K> {
         protected boolean updateHeight() {
             int origH = this.height;
             if(left == null && right == null){
-                height = -1;
+                height = 0;
             } else if (left == null){
                 height = right.height + 1;
             } else if (right == null) {
@@ -267,6 +267,7 @@ public class BinarySearchTree <K> implements Tree <K> {
     public void clear() {
         this.root.left = null;
         this.root.right = null;
+        numNodes = 1;
     }
 
     /**
@@ -288,7 +289,12 @@ public class BinarySearchTree <K> implements Tree <K> {
      * node containing the key), or null if the key is already present.
      */
     public Node insert(K key) {
-        root.insert(key);
+        if (root == null) {
+            root = new Node(key, null, null);
+        } else {
+            root.insert(key);
+        }
+        numNodes++;
         return search(key);
     }
 
@@ -313,6 +319,7 @@ public class BinarySearchTree <K> implements Tree <K> {
      */
     public void remove(K key) {
         remove_helper(root,key);
+        numNodes--;
     }
 
     private Node remove_helper(Node n, K key) {
