@@ -50,7 +50,17 @@ public class AVLTree<K> extends BinarySearchTree<K> {
     }
 
     public void remove(K key) {
+        super.remove(key);
+        Node curr = find(key,root,null);
 
+        while(curr != null && !curr.isAVL()) {
+            curr.updateHeight();
+
+            if(!curr.isAVL())
+                rebalance(curr);
+
+            curr = curr.parent;
+        }
     }
 
     public void rebalance(Node curr) {
