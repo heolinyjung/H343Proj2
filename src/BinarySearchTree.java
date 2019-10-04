@@ -108,13 +108,13 @@ public class BinarySearchTree <K> implements Tree <K> {
             boolean inserted;
             if (lessThan.test(k,data)) {
                 if (left == null) {
-                    left = new Node(k, null, null);
+                    left = new Node(k, null, null, this);
                     inserted = true;
                 } else
                     inserted = left.insert(k);
             } else if (lessThan.test(data,k)) {
                 if (right == null) {
-                    right = new Node(k, null, null);
+                    right = new Node(k, null, null, this);
                     inserted = true;
                 } else
                     inserted = right.insert(k);
@@ -319,7 +319,6 @@ public class BinarySearchTree <K> implements Tree <K> {
      */
     public void remove(K key) {
         remove_helper(root,key);
-        numNodes--;
     }
 
     private Node remove_helper(Node n, K key) {
