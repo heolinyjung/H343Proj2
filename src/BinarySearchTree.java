@@ -290,10 +290,12 @@ public class BinarySearchTree <K> implements Tree <K> {
     public Node insert(K key) {
         if (root == null) {
             root = new Node(key, null, null);
+            numNodes++;
         } else {
-            root.insert(key);
+            if (root.insert(key)) {
+                numNodes++;
+            }
         }
-        numNodes++;
         return search(key);
     }
 
