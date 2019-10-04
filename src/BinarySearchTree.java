@@ -265,8 +265,7 @@ public class BinarySearchTree <K> implements Tree <K> {
      * Clears all the keys from this tree. Runs in O(1) time!
      */
     public void clear() {
-        this.root.left = null;
-        this.root.right = null;
+        this.root = null;
         numNodes = 0;
     }
 
