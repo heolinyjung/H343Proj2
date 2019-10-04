@@ -37,26 +37,11 @@ public class AVLTree<K> extends BinarySearchTree<K> {
         Node insertedNode = super.insert(key);
         Node curr = insertedNode.parent;
 
-        while(!curr.isAVL() && curr.parent != null) {
+        while(curr != null && !curr.isAVL()) {
             curr.updateHeight();
 
-            if(!curr.isAVL()) {
-                if (curr.left.height < curr.right.height) {
-                    if (curr.right.left.height <= curr.right.right.height) {
-                        leftRotate(curr.left);
-                    } else if (curr.right.left.height > curr.right.left.height) {
-                        rightRotate(curr.right);
-                        leftRotate(curr);
-                    }
-                } else if (curr.left.height > curr.right.height) {
-                    if (curr.left.left.height < curr.left.right.height) {
-                        leftRotate(curr.right);
-                        rightRotate(curr);
-                    } else if (curr.left.left.height < curr.left.right.height) {
-                        rightRotate(curr);
-                    }
-                }
-            }
+            if(!curr.isAVL())
+                rebalance(curr);
 
             curr = curr.parent;
         }
@@ -66,6 +51,24 @@ public class AVLTree<K> extends BinarySearchTree<K> {
 
     public void remove(K key) {
 
+    }
+
+    public void rebalance(Node curr) {
+        if (curr.left.height < curr.right.height) {
+            if (curr.right.left.height <= curr.right.right.height) {
+                leftRotate(curr.left);
+            } else if (curr.right.left.height > curr.right.right.height) {
+                rightRotate(curr.right);
+                leftRotate(curr);
+            }
+        } else if (curr.left.height > curr.right.height) {
+            if (curr.left.left.height < curr.left.right.height) {
+                leftRotate(curr.right);
+                rightRotate(curr);
+            } else if (curr.left.left.height < curr.left.right.height) {
+                rightRotate(curr);
+            }
+        }
     }
 
     public Node rightRotate(Node x){
