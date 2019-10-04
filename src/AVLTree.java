@@ -106,26 +106,22 @@ public class AVLTree<K> extends BinarySearchTree<K> {
     }
 
     public Node leftRotate(Node x){
-        if (x != null) {
-            Node y = x.right;
-            Node B = null;
-            if (y != null) {
-                B = y.left;
-            }
-            Node p = x.parent;
-            if (x.data.equals(p.right.data)) {
-                p.right = y;
-                y.parent = p;
-            } else {
-                p.left = y;
-                y.parent = p;
-            }
-            x.right = B;
-            y.left = x;
-            return x;
-        }
-        else {
-            return null;
-        }
+        Node y = x.right;
+        Node T2 = y.left;
+
+        // Perform rotation
+        y.left = x;
+        x.right = T2;
+
+        //  Update heights
+        x.height = max(get_height(x.left), get_height(x.right)) + 1;
+        y.height = max(get_height(y.left), get_height(y.right)) + 1;
+
+        // Return new root
+        return y;
+    }
+
+    private int max(int a, int b) {
+        return (a > b) ? a : b;
     }
 }
