@@ -128,11 +128,7 @@ public class BinarySearchTree <K> implements Tree <K> {
          * of this node.
          */
         public Node next() {
-            if (right != null){
-                return right.first();
-            } else {
-                return nextAncestor();
-            }
+            return right != null ? right.first() : nextAncestor();
         }
 
         /**
@@ -166,11 +162,12 @@ public class BinarySearchTree <K> implements Tree <K> {
          * to perform key comparisons to implement this method.
          */
         public Node nextAncestor() {
-            if (parent != null && this == parent.right){
-                return parent.nextAncestor();
-            } else {
-                return parent;
-            }
+            Node curr = this;
+
+            while(curr.parent != null && curr != curr.parent.left)
+                curr = curr.parent;
+
+            return curr.parent;
         }
 
         /**

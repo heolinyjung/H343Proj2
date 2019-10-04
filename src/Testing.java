@@ -249,9 +249,9 @@ public class Testing {
         int n = a.length;
         for (Integer key : a)
             bst.insert(key);
-        assertNull(bst.search(1).next());
+        assertNull(bst.search(1).previous());
         for (int i = 2; i <= n; i++)
-            assertTrue(i - 1 == bst.search(i).next().get());
+            assertTrue(i - 1 == bst.search(i).previous().get());
     }
 
     @Test
@@ -263,8 +263,8 @@ public class Testing {
         for (Integer key : a)
             bst.insert(key);
         for (int i = 1; i < n; i++)
-            assertTrue(i + 1 == bst.search(i).previous().get());
-        assertNull(bst.search(n).previous());
+            assertTrue(i + 1 == bst.search(i).next().get());
+        assertNull(bst.search(n).next());
     }
 
     /**********************************************************************************
@@ -276,6 +276,7 @@ public class Testing {
      * in action.
      **********************************************************************************/
 
+    /*
     @Test
     public void insertAVL() {
         BinarySearchTree<Integer> avl = new AVLTree<>((Integer x, Integer y) -> x < y);
@@ -550,5 +551,6 @@ public class Testing {
         return lessThan.test(p.data, x)
                 && allLessThan(p.left, x, lessThan) && allLessThan(p.right, x, lessThan);
     }
+
 
 }
