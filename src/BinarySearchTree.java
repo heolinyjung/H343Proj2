@@ -367,7 +367,9 @@ public class BinarySearchTree <K> implements Tree <K> {
      */
     public List<K> keys() {
         List<K> list = new LinkedList<>();
-        root.inorder(list);
+        if(root != null)
+            root.inorder(list);
+
         return list;
     }
 
