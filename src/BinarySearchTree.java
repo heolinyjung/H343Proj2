@@ -317,7 +317,7 @@ public class BinarySearchTree <K> implements Tree <K> {
      * nothing happens.
      */
     public void remove(K key) {
-        remove_helper(root,key);
+        root = remove_helper(root,key);
     }
 
     private Node remove_helper(Node n, K key) {
