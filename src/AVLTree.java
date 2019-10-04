@@ -104,7 +104,8 @@ public class AVLTree<K> extends BinarySearchTree<K> {
                 x.left = B;
                 y.right = x;
                 y.updateHeight();
-            }
+            } else
+                x.parent = null;
             if (B != null)
                 B.parent = x;
             x.updateHeight();
@@ -139,7 +140,8 @@ public class AVLTree<K> extends BinarySearchTree<K> {
                 x.right = B;
                 y.left = x;
                 y.updateHeight();
-            }
+            } else
+                x.parent = null;
             if (B != null)
                 B.parent = x;
             x.updateHeight();

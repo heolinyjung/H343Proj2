@@ -212,7 +212,10 @@ public class BinarySearchTree <K> implements Tree <K> {
         }
 
         public String toString() {
-            return toStringPreorder(this) + this.height;
+            if (parent != null)
+                return toStringPreorder(this) + " H: " + this.height + " P: " + this.parent.data;
+            else
+                return toStringPreorder(this) + " H: " + this.height + " P: null";
         }
 
     }
@@ -335,14 +338,19 @@ public class BinarySearchTree <K> implements Tree <K> {
             return n;
         } else { // remove this node
             --numNodes;
+            Node p = n.parent;
             if (n.left == null) {
+                if (n.right != null)
+                    n.right.parent = p;
                 return n.right;
             } else if (n.right == null) {
+                n.left.parent = p;
                 return n.left;
             } else { // two children, replace this with min of right subtree
                 Node min = get_min(n.right);
                 n.data = min.data;
                 n.right = delete_min(n.right);
+                n.parent = p;
                 return n;
             }
         }
