@@ -40,8 +40,22 @@ public class AVLTree<K> extends BinarySearchTree<K> {
         while(!curr.isAVL() && curr.parent !=  null) {
             curr.updateHeight();
 
-            if(!curr.isAVL()) {
-                // rebalance
+            if(curr.left.height < curr.right.height) {
+                if (curr.right.left.height <= curr.right.right.height) {
+                    leftRotate(curr.left);
+                } else if (curr.right.left.height > curr.right.left.height) {
+                    rightRotate(curr.right);
+                    leftRotate(curr);
+                }
+            }
+            else if(curr.left.height > curr.right.height) {
+                if(curr.left.left.height < curr.left.right.height) {
+                    leftRotate(curr.right);
+                    rightRotate(curr);
+                }
+                else if(curr.left.left.height < curr.left.right.height) {
+                    rightRotate(curr);
+                }
             }
 
             curr = curr.parent;
@@ -51,7 +65,7 @@ public class AVLTree<K> extends BinarySearchTree<K> {
     }
 
     public void remove(K key) {
-        super.remove(key);
+
     }
 
     public Node rightRotate(Node x){
