@@ -37,7 +37,7 @@ public class AVLTree<K> extends BinarySearchTree<K> {
         Node insertedNode = super.insert(key);
         Node curr = insertedNode.parent;
 
-        while(curr != null && !curr.isAVL()) {
+        while(curr != null) {
             curr.updateHeight();
 
             if(!curr.isAVL())
@@ -66,8 +66,8 @@ public class AVLTree<K> extends BinarySearchTree<K> {
     public void rebalance(Node curr) {
         if (get_height(curr.left) < get_height(curr.right)) {
             if (get_height(curr.right.left) <= get_height(curr.right.right)) {
-                leftRotate(curr.left);
-            } else if (get_height(curr.right.left) > get_height(curr.right.right)) {
+                leftRotate(curr);
+            } else {
                 rightRotate(curr.right);
                 leftRotate(curr);
             }
@@ -75,7 +75,7 @@ public class AVLTree<K> extends BinarySearchTree<K> {
             if (get_height(curr.left.left) < get_height(curr.left.right)) {
                 leftRotate(curr.right);
                 rightRotate(curr);
-            } else if (get_height(curr.left.left) < get_height(curr.left.right)) {
+            } else {
                 rightRotate(curr);
             }
         }
@@ -88,16 +88,26 @@ public class AVLTree<K> extends BinarySearchTree<K> {
             if (y != null) {
                 B = y.right;
             }
-            Node p = x.parent;
-            if (x.data.equals(p.left.data)) {
-                p.left = y;
-                y.parent = p;
-            } else {
-                p.right = y;
-                y.parent = p;
+            Node p = null;
+            if (x.parent != null)
+                p = x.parent;
+
+            if (p != null) {
+                if (x.data.equals(p.left.data)) {
+                    p.left = y;
+                } else {
+                    p.right = y;
+                }
             }
+            y.parent = p;
+            x.parent = y;
             x.left = B;
+            if (B != null)
+                B.parent = x;
             y.right = x;
+            root = y;
+            y.updateHeight();
+            x.updateHeight();
             return x;
         }
         else {

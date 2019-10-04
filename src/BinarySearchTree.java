@@ -212,7 +212,7 @@ public class BinarySearchTree <K> implements Tree <K> {
         }
 
         public String toString() {
-            return toStringPreorder(this);
+            return toStringPreorder(this) + this.height;
         }
 
     }
