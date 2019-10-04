@@ -51,6 +51,7 @@ public class AVLTree<K> extends BinarySearchTree<K> {
     }
 
     public void remove(K key) {
+        super.remove(key);
     }
 
     public Node rightRotate(Node x){
