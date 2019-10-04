@@ -91,7 +91,6 @@ public class AVLTree<K> extends BinarySearchTree<K> {
             Node p = null;
             if (x.parent != null)
                 p = x.parent;
-
             if (p != null) {
                 if (x.data.equals(p.left.data)) {
                     p.left = y;
@@ -122,16 +121,25 @@ public class AVLTree<K> extends BinarySearchTree<K> {
             if (y != null) {
                 B = y.left;
             }
-            Node p = x.parent;
-            if (x.data.equals(p.right.data)) {
-                p.right = y;
-                y.parent = p;
-            } else {
-                p.left = y;
-                y.parent = p;
+            Node p = null;
+            if (x.parent != null)
+                p = x.parent;
+            if (p != null) {
+                if (x.data.equals(p.right.data)) {
+                    p.right = y;
+                } else {
+                    p.left = y;
+                }
             }
+            y.parent = p;
+            x.parent = y;
             x.right = B;
             y.left = x;
+            if (B != null)
+                B.parent = x;
+            root = y;
+            y.updateHeight();
+            x.updateHeight();
             return x;
         }
         else {
