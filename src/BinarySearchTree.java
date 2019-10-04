@@ -7,6 +7,7 @@
 //
 //////////////////////////////////////////////////////////////////////
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.function.BiPredicate;
@@ -230,7 +231,6 @@ public class BinarySearchTree <K> implements Tree <K> {
      */
     public BinarySearchTree(BiPredicate<K, K> lessThan) {
         this.lessThan = lessThan;
-        numNodes = 0;
     }
 
     /**
@@ -265,8 +265,7 @@ public class BinarySearchTree <K> implements Tree <K> {
      * Clears all the keys from this tree. Runs in O(1) time!
      */
     public void clear() {
-        this.root.left = null;
-        this.root.right = null;
+        root = null;
         numNodes = 0;
     }
 
