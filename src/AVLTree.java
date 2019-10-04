@@ -46,7 +46,7 @@ public class AVLTree<K> extends BinarySearchTree<K> {
             curr = curr.parent;
         }
 
-        return null;
+        return insertedNode;
     }
 
     public void remove(K key) {
