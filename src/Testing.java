@@ -276,7 +276,7 @@ public class Testing {
      * in action.
      **********************************************************************************/
 
-    /*
+
     @Test
     public void insertAVL() {
         BinarySearchTree<Integer> avl = new AVLTree<>((Integer x, Integer y) -> x < y);
@@ -551,6 +551,4 @@ public class Testing {
         return lessThan.test(p.data, x)
                 && allLessThan(p.left, x, lessThan) && allLessThan(p.right, x, lessThan);
     }
-
-
 }

@@ -64,18 +64,18 @@ public class AVLTree<K> extends BinarySearchTree<K> {
     }
 
     public void rebalance(Node curr) {
-        if (curr.left.height < curr.right.height) {
-            if (curr.right.left.height <= curr.right.right.height) {
+        if (get_height(curr.left) < get_height(curr.right)) {
+            if (get_height(curr.right.left) <= get_height(curr.right.right)) {
                 leftRotate(curr.left);
-            } else if (curr.right.left.height > curr.right.right.height) {
+            } else if (get_height(curr.right.left) > get_height(curr.right.right)) {
                 rightRotate(curr.right);
                 leftRotate(curr);
             }
-        } else if (curr.left.height > curr.right.height) {
-            if (curr.left.left.height < curr.left.right.height) {
+        } else if (get_height(curr.left) > get_height(curr.right)) {
+            if (get_height(curr.left.left) < get_height(curr.left.right)) {
                 leftRotate(curr.right);
                 rightRotate(curr);
-            } else if (curr.left.left.height < curr.left.right.height) {
+            } else if (get_height(curr.left.left) < get_height(curr.left.right)) {
                 rightRotate(curr);
             }
         }

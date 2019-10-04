@@ -255,7 +255,10 @@ public class BinarySearchTree <K> implements Tree <K> {
      * Returns the height of this tree. Runs in O(1) time!
      */
     public int height() {
-        return root.height;
+        if (root == null)
+            return -1;
+        else
+            return root.height;
     }
 
     /**
